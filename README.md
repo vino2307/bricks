@@ -20,9 +20,6 @@ bricks
 │   └── utils
 │       ├── __init__.py
 │       └── constants.py
-├── tests
-│   ├── __init__.py
-│   └── test_game_objects.py
 ├── requirements.txt
 └── README.md
 ```
