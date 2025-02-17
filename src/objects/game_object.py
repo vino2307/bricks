@@ -23,3 +23,13 @@ class GameObject(ABC):
     @abstractmethod
     def update(self):
         pass
+
+        # @abstractmethod
+        # def points(self):
+        #     pass
+
+        # def on_collision(self, other):
+        #     pass
+
+        # def after_collision(self, other):
+        # pass

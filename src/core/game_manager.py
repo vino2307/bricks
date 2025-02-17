@@ -1,8 +1,9 @@
 import pygame
-from objects.brick import Brick
+from objects.brick import Brick, BrickType
 from objects.ball import Ball
 from objects.paddle import Paddle
 import config
+import random
 
 
 class BrickBreakerGame:
@@ -26,11 +27,12 @@ class BrickBreakerGame:
                 y * (15 + spacing) + 50,
                 width=brick_width,
                 height=15,
+                brick_type=random.choice(list(BrickType)),
             )
             for y in range(config.BRICK_ROWS)
             for x in range(bricks_per_row)
         ]
-        self.paddle = Paddle(350, 550, width=60, height=2)
+        self.paddle = Paddle(350, 750, width=360, height=2)
         self.ball = Ball(700, 300, 5)
 
     def run(self):
@@ -44,9 +46,20 @@ class BrickBreakerGame:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            # Handle key press events
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.running = False
+                    return False
+
+        return True
 
     def update(self):
         self.ball.update()
+        self.bricks = [
+            brick for brick in self.bricks if not brick.handle_collision(self.ball)
+        ]
+        self.paddle.update(None)  # Add this line to update paddle
         if self.check_collision(self.ball, self.paddle):
             self.ball.dy *= -1
 
