@@ -32,7 +32,7 @@ class BrickBreakerGame:
             for y in range(config.BRICK_ROWS)
             for x in range(bricks_per_row)
         ]
-        self.paddle = Paddle(350, 750, width=360, height=2)
+        self.paddle = Paddle(350, 250, width=360, height=2)
         self.ball = Ball(700, 300, 5)
 
     def run(self):
